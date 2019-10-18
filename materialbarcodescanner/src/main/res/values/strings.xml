@@ -1,0 +1,5 @@
+<resources>
+    <string name="library_name">MaterialBarcodeScanner</string>
+    <string name="permission_camera_rationale">O acesso à câmera é necessário para a detecção do código de barras.</string>
+    <string name="no_camera_permission">Não é possível iniciar o leitor de código de barras porque a permissão da câmera não foi concedida.</string>
+</resources>
