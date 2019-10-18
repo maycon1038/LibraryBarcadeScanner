@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 				.withResultListener(new MaterialBarcodeScanner.OnResultListener() {
 					@Override
 					public void onResult(Barcode barcode, String code) {
-						if (code != null) {
+						if (barcode == null) {
 
 							Log.d("Resultado", String.valueOf(code.matches("^(http|https|ftp)://.*$")));
 

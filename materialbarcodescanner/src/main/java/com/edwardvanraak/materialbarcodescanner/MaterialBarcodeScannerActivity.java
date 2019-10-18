@@ -12,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -143,12 +141,12 @@ public class MaterialBarcodeScannerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    mGraphicOverlay.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            finish();
-                        }
-                    }, 50);
+                mGraphicOverlay.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 50);
 
             }
         });
@@ -165,19 +163,11 @@ public class MaterialBarcodeScannerActivity extends AppCompatActivity {
                 .input("Digite aqui o código", "", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
-                        if (!mDetectionConsumed) {
-                            mDetectionConsumed = true;
-                            Log.d(TAG, "Barcode Digitado! - " + input);
-                            mMaterialBarcodeScanner.setCode(String.valueOf(input));
-                            EventBus.getDefault().postSticky(String.valueOf(input));
-                            updateCenterTrackerForDetectedState();
-                            mGraphicOverlay.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    finish();
-                                }
-                            }, 50);
-                        }
+
+                        Log.d(TAG, "Barcode Digitado! - " + input);
+                        mMaterialBarcodeScannerBuilder.onResultListener.onResult(null, String.valueOf(input));
+                        finish();
+
 
                     }
 
