@@ -20,6 +20,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.msm.themes.BaseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -28,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.IOException;
 
 
-public class MaterialBarcodeScannerActivity extends AppCompatActivity {
+public class MaterialBarcodeScannerActivity extends BaseActivity {
 
     private static final int RC_HANDLE_GMS = 9001;
 

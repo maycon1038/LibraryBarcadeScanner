@@ -17,12 +17,17 @@ import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.msm.themes.BaseActivity;
+import com.msm.themes.ThemeUtil;
 
-public class MainActivity extends AppCompatActivity {
+import static com.msm.themes.ThemeUtil.THEME_BLUE;
+
+public class MainActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ThemeUtil.setMyTheme(this, THEME_BLUE);
 		setContentView(R.layout.activity_main);
 		Toolbar toolbar = findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
@@ -79,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 							if (code.matches("^(http|https|ftp)://.*$")) {
 								shareDeepLink(code);
 							}else{
-								Toast.makeText(MainActivity.this,code, Toast.LENGTH_SHORT).show();
+							//	Toast.makeText(MainActivity.this,code, Toast.LENGTH_SHORT).show();
 							}
 						} else {
 
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 							if (barcode.rawValue.matches("^(http|https|ftp)://.*$")){
 								shareDeepLink(barcode.rawValue);
 							}else{
-								Toast.makeText(MainActivity.this, barcode.rawValue, Toast.LENGTH_SHORT).show();
+							//	Toast.makeText(MainActivity.this, barcode.rawValue, Toast.LENGTH_SHORT).show();
 							}
 						}
 
