@@ -129,7 +129,12 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
         }
 
         final Button cancelarOnButton = findViewById(R.id.btn_cancelar);
+
         final Button digitarCodigoOnButton = findViewById(R.id.btn_digitar_codigo);
+        if(!mMaterialBarcodeScannerBuilder.isEnterCode()){
+            digitarCodigoOnButton.setVisibility(View.GONE);
+        }
+
 
         digitarCodigoOnButton.setOnClickListener(new View.OnClickListener() {
             @Override

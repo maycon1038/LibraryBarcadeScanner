@@ -30,6 +30,8 @@ public class MaterialBarcodeScannerBuilder {
 
     protected boolean mBleepEnabled = false;
 
+    protected boolean  enterCode= false;
+
     protected boolean mFlashEnabledByDefault = false;
 
     protected int mBarcodeFormats = Barcode.ALL_FORMATS;
@@ -125,6 +127,14 @@ public class MaterialBarcodeScannerBuilder {
     public MaterialBarcodeScannerBuilder withBleepEnabled(boolean enabled){
         mBleepEnabled = enabled;
         return this;
+    }
+    public MaterialBarcodeScannerBuilder withEnterCode(boolean  code){
+        enterCode =  code;
+        return this;
+    }
+
+    public boolean isEnterCode() {
+        return enterCode;
     }
 
     /**
