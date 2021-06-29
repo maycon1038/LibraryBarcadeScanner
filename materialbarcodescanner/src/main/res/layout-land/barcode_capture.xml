@@ -70,7 +70,7 @@
 
         <Button
             android:id="@+id/btn_cancelar"
-            style="@style/Buton"
+            style="@style/Button"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
@@ -80,7 +80,7 @@
 
         <Button
             android:id="@+id/btn_digitar_codigo"
-            style="@style/Buton"
+            style="@style/Button"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
