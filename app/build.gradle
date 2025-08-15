@@ -12,10 +12,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     namespace "br.com.msm.librarybarcodescanner"
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_18
-        targetCompatibility JavaVersion.VERSION_18
-    }
 }
 
 dependencies {

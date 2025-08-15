@@ -1,5 +1,6 @@
 package com.edwardvanraak.materialbarcodescanner;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -67,6 +69,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
 
     }
 
+    @RequiresPermission(Manifest.permission.CAMERA)
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onMaterialBarcodeScanner(MaterialBarcodeScanner materialBarcodeScanner) {
         this.mMaterialBarcodeScanner = materialBarcodeScanner;
@@ -112,6 +115,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
         final ImageView flashToggleIcon = findViewById(R.id.flashIcon);
 
         flashOnButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresPermission(Manifest.permission.CAMERA)
             @Override
             public void onClick(View v) {
                 if (mFlashOn) {
@@ -187,6 +191,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
      * (e.g., because onResume was called before the camera source was created), this will be called
      * again when the camera source is created.
      */
+    @RequiresPermission(Manifest.permission.CAMERA)
     private void startCameraSource() throws SecurityException {
         // check that the device has play services available.
         mSoundPoolPlayer = new SoundPoolPlayer(this);
@@ -232,21 +237,23 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
         }
     }
 
+    @RequiresPermission(Manifest.permission.CAMERA)
     private void enableTorch() throws SecurityException {
         mMaterialBarcodeScannerBuilder.getCameraSource().setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         try {
             mMaterialBarcodeScannerBuilder.getCameraSource().start();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Unable to start camera source. " + e.getMessage());
         }
     }
 
+    @RequiresPermission(Manifest.permission.CAMERA)
     private void disableTorch() throws SecurityException {
         mMaterialBarcodeScannerBuilder.getCameraSource().setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         try {
             mMaterialBarcodeScannerBuilder.getCameraSource().start();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Could not start camera source.", e);
         }
     }
 

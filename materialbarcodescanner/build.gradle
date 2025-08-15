@@ -5,8 +5,7 @@ android {
     compileSdk 35
     defaultConfig {
         minSdk 24
-        versionCode 1
-        versionName "1.0"
+        targetSdk 35
     }
     namespace "com.edwardvanraak.materialbarcodescanner"
 

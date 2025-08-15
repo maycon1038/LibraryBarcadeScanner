@@ -106,6 +106,7 @@ public class CameraSourcePreview extends ViewGroup {
     }
 
     private class SurfaceCallback implements SurfaceHolder.Callback {
+        @RequiresPermission(Manifest.permission.CAMERA)
         @Override
         public void surfaceCreated(SurfaceHolder surface) {
             mSurfaceAvailable = true;
@@ -128,6 +129,7 @@ public class CameraSourcePreview extends ViewGroup {
         }
     }
 
+    @RequiresPermission(Manifest.permission.CAMERA)
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         int previewWidth = 320;
