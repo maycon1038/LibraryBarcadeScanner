@@ -91,7 +91,7 @@ public class SecondFragment extends Fragment {
             startActivity(myIntent);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(getContext(), "Nenhum aplicativo pode lidar com essa solicitação. Instale um navegador da web",  Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+          //  e.printStackTrace();
         }
     }
 }
