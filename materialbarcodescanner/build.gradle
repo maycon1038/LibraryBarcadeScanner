@@ -4,7 +4,8 @@ android {
     compileSdk 35
     defaultConfig {
         minSdk 24
-        targetSdk 35
+        versionCode 1
+        versionName "1.0"
     }
     namespace "com.edwardvanraak.materialbarcodescanner"
     compileOptions {
@@ -16,8 +17,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'org.greenrobot:eventbus:3.0.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.gms:play-services-vision:20.1.3'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'com.github.maycon1038:LibraryThemes:4.3.1'
