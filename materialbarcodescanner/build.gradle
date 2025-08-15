@@ -8,7 +8,11 @@ android {
         targetSdk 35
     }
     namespace "com.edwardvanraak.materialbarcodescanner"
-
+//ambiente do JitPack está usando o Java 17
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 afterEvaluate {
     publishing {
@@ -18,7 +22,7 @@ afterEvaluate {
                 artifact sourcesJar // Opcional: inclui fontes
                 groupId = 'com.github.maycon1038'
                 artifactId = project.name
-                version = '2.0.2'
+                version = '2.0.4'
             }
         }
     }
