@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+group='com.github.maycon1038'
+apply plugin: 'maven-publish'
 android {
     compileSdk 35
     defaultConfig {
@@ -8,12 +9,21 @@ android {
         versionName "1.0"
     }
     namespace "com.edwardvanraak.materialbarcodescanner"
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_18
-        targetCompatibility JavaVersion.VERSION_18
+
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                artifact bundleReleaseAar
+                artifact sourcesJar // Opcional: inclui fontes
+                groupId = 'com.github.maycon1038'
+                artifactId = project.name
+                version = '2.0.2'
+            }
+        }
     }
 }
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -23,4 +33,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'com.github.maycon1038:LibraryThemes:4.3.1'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+}
+// Tarefa sourcesJar deve estar no mesmo arquivo do módulo Android
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set('sources')
 }
