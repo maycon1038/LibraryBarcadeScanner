@@ -43,40 +43,37 @@ public class SecondFragment extends Fragment {
 
     private void startScan() {
         final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
-                .withActivity(getActivity())
+                .withActivity(requireActivity())
                 .withEnableAutoFocus(true)
                 .withBleepEnabled(true)
                 .withBackfacingCamera()
                 .withText("Scanning...")
                 .withCenterTracker()
                 .withCenterTracker(R.drawable.bacground_ret_barcode, R.drawable.bacground_ret_barcode_update)
-                .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
-                    @Override
-                    public void onResult(Barcode barcode, String code) {
-                        if (barcode == null) {
+                .withResultListener((barcode, code) -> {
+                    if (barcode == null) {
 
-                            Log.d("Resultado", String.valueOf(code.matches("^(http|https|ftp)://.*$")));
+                        Log.d("Resultado", String.valueOf(code.matches("^(http|https|ftp)://.*$")));
 
-                            Toast.makeText(getActivity(), code, Toast.LENGTH_SHORT).show();
-                            if (code.matches("^(http|https|ftp)://.*$")) {
-                                shareDeepLink(code);
-                            }else{
-                                //	Toast.makeText(MainActivity.this,code, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-
-                            Log.d("Resultado", String.valueOf(barcode.rawValue.matches("^(http|https|ftp)://.*$")));
-
-                            if (barcode.rawValue.matches("^(http|https|ftp)://.*$")){
-                                shareDeepLink(barcode.rawValue);
-                            }else{
-                                //	Toast.makeText(MainActivity.this, barcode.rawValue, Toast.LENGTH_SHORT).show();
-                            }
+                        Toast.makeText(getActivity(), code, Toast.LENGTH_SHORT).show();
+                        if (code.matches("^(http|https|ftp)://.*$")) {
+                            shareDeepLink(code);
+                        }else{
+                            //	Toast.makeText(MainActivity.this,code, Toast.LENGTH_SHORT).show();
                         }
+                    } else {
 
-					/*	barcodeResult = barcode;
-						result.setText(barcode.rawValue); */
+                        Log.d("Resultado", String.valueOf(barcode.rawValue.matches("^(http|https|ftp)://.*$")));
+
+                        if (barcode.rawValue.matches("^(http|https|ftp)://.*$")){
+                            shareDeepLink(barcode.rawValue);
+                        }else{
+                            //	Toast.makeText(MainActivity.this, barcode.rawValue, Toast.LENGTH_SHORT).show();
+                        }
                     }
+
+                /*	barcodeResult = barcode;
+                    result.setText(barcode.rawValue); */
                 })
                 .build();
         materialBarcodeScanner.startScan();

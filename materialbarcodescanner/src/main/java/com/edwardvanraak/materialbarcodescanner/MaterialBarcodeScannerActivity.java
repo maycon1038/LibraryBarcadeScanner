@@ -69,7 +69,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
 
     }
 
-    @RequiresPermission(Manifest.permission.CAMERA)
+
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onMaterialBarcodeScanner(MaterialBarcodeScanner materialBarcodeScanner) {
         this.mMaterialBarcodeScanner = materialBarcodeScanner;
@@ -115,7 +115,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
         final ImageView flashToggleIcon = findViewById(R.id.flashIcon);
 
         flashOnButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresPermission(Manifest.permission.CAMERA)
+
             @Override
             public void onClick(View v) {
                 if (mFlashOn) {
@@ -191,12 +191,11 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
      * (e.g., because onResume was called before the camera source was created), this will be called
      * again when the camera source is created.
      */
-    @RequiresPermission(Manifest.permission.CAMERA)
+
     private void startCameraSource() throws SecurityException {
         // check that the device has play services available.
         mSoundPoolPlayer = new SoundPoolPlayer(this);
-        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
-                getApplicationContext());
+        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getApplicationContext());
         if (code != ConnectionResult.SUCCESS) {
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
             dialog.show();
@@ -207,7 +206,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
             public void onNewDetection(Barcode barcode) {
                 if (!mDetectionConsumed) {
                     mDetectionConsumed = true;
-                    Log.d(TAG, "Barcode detected! - " + barcode.displayValue);
+                    Log.d(TAG, "Barcode detected! - " + barcode.displayValue); //TODO
                     EventBus.getDefault().postSticky(barcode);
                     updateCenterTrackerForDetectedState();
                     if (mMaterialBarcodeScannerBuilder.isBleepEnabled()) {
@@ -223,21 +222,20 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
             }
         };
         BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay, listener, mMaterialBarcodeScannerBuilder.getTrackerColor());
-        barcodeDetector.setProcessor(new MultiProcessor.Builder<>(barcodeFactory).build());
+        barcodeDetector.setProcessor(new MultiProcessor.Builder<>(barcodeFactory).build());//TODO
         CameraSource mCameraSource = mMaterialBarcodeScannerBuilder.getCameraSource();
         if (mCameraSource != null) {
             try {
                 mCameraSourcePreview = (CameraSourcePreview) findViewById(R.id.preview);
-                mCameraSourcePreview.start(mCameraSource, mGraphicOverlay);
+                mCameraSourcePreview.start(mCameraSource, mGraphicOverlay); //TODO
             } catch (IOException e) {
                 Log.e(TAG, "Unable to start camera source.", e);
-                mCameraSource.release();
-                mCameraSource = null;
+                mCameraSource.release(); //TODO
             }
         }
     }
 
-    @RequiresPermission(Manifest.permission.CAMERA)
+
     private void enableTorch() throws SecurityException {
         mMaterialBarcodeScannerBuilder.getCameraSource().setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
         try {
@@ -247,7 +245,7 @@ public class MaterialBarcodeScannerActivity extends BaseActivity {
         }
     }
 
-    @RequiresPermission(Manifest.permission.CAMERA)
+
     private void disableTorch() throws SecurityException {
         mMaterialBarcodeScannerBuilder.getCameraSource().setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         try {

@@ -18,7 +18,7 @@ afterEvaluate {
                 artifact sourcesJar // Opcional: inclui fontes
                 groupId = 'com.github.maycon1038'
                 artifactId = 'materialbarcodescanner'
-                version = '2.0.6'
+                version = '2.0.8'
             }
         }
     }
